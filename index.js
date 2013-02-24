@@ -17,8 +17,8 @@ util.inherits(JLick, Steez);
 JLick.prototype.write = function write(data) {
   this.buffer += data;
 
-  if (data.indexOf(this.terminator) !== -1) {
-    var lines = data.split(this.terminator);
+  if (this.buffer.indexOf(this.terminator) !== -1) {
+    var lines = this.buffer.split(this.terminator);
     this.buffer = lines.pop();
 
     lines.forEach(function(line) {
