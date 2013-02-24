@@ -1,6 +1,6 @@
 {
   "name": "jlick",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Streaming configurably terminated (simple) JSON parser",
   "main": "index.js",
   "repository": {
