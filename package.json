@@ -1,0 +1,23 @@
+{
+  "name": "jlick",
+  "version": "0.0.0",
+  "description": "Streaming configurably terminated (simple) JSON parser",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/deoxxa/jlick.git"
+  },
+  "keywords": [
+    "json",
+    "parse",
+    "stream",
+    "newline",
+    "split",
+    "whitespace"
+  ],
+  "author": "Conrad Pankoff <deoxxa@fknsrs.biz> (http://www.fknsrs.biz/)",
+  "license": "BSD",
+  "dependencies": {
+    "steez": "~0.4.2"
+  }
+}
