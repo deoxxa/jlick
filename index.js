@@ -1,8 +1,8 @@
-var Steez = require("steez"),
+var stream = require("stream"),
     util = require("util");
 
 var JLick = module.exports = function JLick(terminator) {
-  Steez.call(this);
+  stream.Transform.call(this, {objectMode: true});
 
   if (typeof terminator === "undefined") {
     this.terminator = "\n";
@@ -12,20 +12,25 @@ var JLick = module.exports = function JLick(terminator) {
 
   this.buffer = Buffer(0);
 };
-util.inherits(JLick, Steez);
+util.inherits(JLick, stream.Transform);
 
-JLick.prototype.write = function write(data) {
-  this.buffer += data;
+JLick.prototype._transform = function _transform(input, encoding, done) {
+  this.buffer += input;
 
   if (this.buffer.indexOf(this.terminator) !== -1) {
     var lines = this.buffer.split(this.terminator);
     this.buffer = lines.pop();
 
     lines.forEach(function(line) {
-      try { line = JSON.parse(line); } catch (e) { return; }
-      this.emit("data", line);
+      try {
+        line = JSON.parse(line);
+      } catch (e) {
+        return;
+      }
+
+      this.push(line);
     }.bind(this));
   }
 
-  return !this.paused && this.writable;
+  return done();
 };
